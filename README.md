@@ -10,6 +10,35 @@
 	- print('Eu estou ' + 'aprendendo')
 - *in* verifica se uma expressão está contida em outra e retorna um *boolean*
 	- ```print('Lua' in 'Lua')```
+- Métodos utéis
+	- *find()* encontra um caracter ou um conjunto de caracteres e retorna a posição do primeiro caracter. ```email.find('@')```
+	- *casefold()* transforma a string em letras minúsculas respeitando acentuações, diferentemente do *lower()*
+	- *captalize()* transforma o primeiro caracter em letra Maiúscula.
+	- *isalnum()* verifica se o texto é compoosto por letras e números. retorna um *boolean*
+	- *isalpha()* verifica se o texto é composto por letras. retorna um *boolean*
+	- *isnumeric()* verifica se o texto é composto por números. retorna um *boolean*
+	- *replace()* encontra e substitui o texto. retorna o texto.
+	- *split()* separa o texto de acordo com um delimitador. retorna um *list()*
+	- *splitline()* separa o texto no *enter*. retorna um *list()*
+	- *startswith()* verifica se o texto inicia com um determinado texto.
+	- *endswith()* verifica se o texto finaliza com um determinado texto.
+	- *strip()* remove caracteres do texto. Por padrão remove espaços em branco no inicio e final do texto.
+	- *title()* transforma o primeiro caracter de cada palavra para maiúscula.
+	- *upper()* transforma todo o texto em letras maiúsculas.
+	- *format()*
+		- *:<* Alinha o texto a esquerda na tela
+		- *:>* Alinha o texto a direita na tela
+		- *:^* Alinha o texto no centro na tela
+		- *:+* Insere um sinal na frente do número (independentemente se positivo ou negativo)
+		- *:,* Coloca a vírgula como separador de milhar
+		- *:_* Coloca o underline como separador de milhar
+		- *:e* Formato cientifíco
+		- *:f* Número com quantidade fixa de casas decimais
+		- *:x* Formato hexadecimal com letras Minúscula (geralmente utilizado em cores)
+		- *:X* Formato hexadecimal com letras Maiúscula (geralmente utilizado em cores)
+		- *:%* Formato percentual
+
+
 
 ### Variável
 - Uma variável é uma localização na memória RAM do computador onde vai ser armazenada temporariamente os dados que são utilizados pelo programa.
