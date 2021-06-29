@@ -83,8 +83,43 @@ if condicao:
 - and (e)
 - or (ou)
 
+## Listas
+list() vetor/matriz são a mesma coisa que array. Em Python é dinâmico e podem receber qualquer tipo de dado como valor.
+
+Métodos úteis:
+- *list.index('item')* -> encontre o índice de um item na lista.
+- *list.append('novo_item')* -> adiciona um elemento no final da lista.
+- *list.pop()* -> remove o útlimo elemento da lista.
+- *list.pop(indice)* -> remove o elemento através de um determinado índice e retorna-o.
+- *list.remove('nome_item')*
+- *len(list)* -> retorna o tamanho da lista
+- *min(list)* -> retorna o menor valor em uma lista. Utilizado em uma lista numerica.
+- *max(list)* -> retorna o maior valor em uma lista. Utilizado em uma lista numerica.
+- *list.extend(list2)* -> Merge (juntando ou mesclando) listas.
+- *list.sort()* -> Ordenação padrão crescente. Para ordenar descrescente passar o parâmentro *reverse=True* ```list.sort(reverse=True)``` 
+- *sum(list)* -> retorna a soma do valores de uma lista. Utilizado em uma lista numerica.
+
+## Tratamento de Exceções
+Métodos úteis:
+- *try* e *except*
+
+
 ## Métodos reservados do Python
+- ```texto.split(', ')``` -> cria uma lista a partir do texto, quebrando-o no espaço em branco.
+- ```';'.join(list)``` -> join separa o texto com delimitador definido.
 - ```type(variavel)``` exibe o tipo de dado de uma variável
+- ```pass``` utilizamos quanto não queremos codificar nenhuma instrução para um bloco obrigatório.
+	- Exemplo:
+		```
+			try:
+				list.remove('chaveiro')
+			except:
+				pass 
+		```
+
+> acima o ***except*** é obrigatório, mas como não queremos implementar instruções utilizamos a palavra reservada *pass* para continar o *script*.
+
+
 
 ## Informações e dicas
 - ```pass``` utilizado para pass o programa em trechos que possa gerar erro por exigir código
