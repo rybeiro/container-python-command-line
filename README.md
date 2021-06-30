@@ -92,12 +92,43 @@ Métodos úteis:
 - *list.pop()* -> remove o útlimo elemento da lista.
 - *list.pop(indice)* -> remove o elemento através de um determinado índice e retorna-o.
 - *list.remove('nome_item')*
+- *list.extend(list2)* -> Merge (juntando ou mesclando) listas.
+- *list.sort()* -> Ordenação padrão crescente. Para ordenar descrescente passar o parâmentro *reverse=True* ```list.sort(reverse=True)``` 
 - *len(list)* -> retorna o tamanho da lista
 - *min(list)* -> retorna o menor valor em uma lista. Utilizado em uma lista numerica.
 - *max(list)* -> retorna o maior valor em uma lista. Utilizado em uma lista numerica.
-- *list.extend(list2)* -> Merge (juntando ou mesclando) listas.
-- *list.sort()* -> Ordenação padrão crescente. Para ordenar descrescente passar o parâmentro *reverse=True* ```list.sort(reverse=True)``` 
 - *sum(list)* -> retorna a soma do valores de uma lista. Utilizado em uma lista numerica.
+- *list.copy() ou list[:]* -> copia uma lista em outro endereço da memória.
+- *Nested list* -> uma lista de listas ou Matriz.
+
+## Estrutura de repetição
+#### for
+O for percorre uma lista e cada loop retorna o valor do item.
+```
+for i in list:
+	print(i)
+```
+- **Enumerate** permite acesso ao índice e ao valor.
+```
+for indice, item in enumerate(list):
+	print("O id {} pertence ao {}".format(indice, item))
+```
+
+#### while
+loop muito útil para repetir um código indeterminadamente enquanto a condição for verdadeira.
+```
+produtos = []
+while True:
+	
+	produto = input("Informe o nome do produto: ")
+	if not produto:
+		break
+	produtos.append(produto)
+
+print(produtos)
+```
+
+
 
 ## Tratamento de Exceções
 Métodos úteis:
