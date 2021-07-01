@@ -100,6 +100,7 @@ Métodos úteis:
 - *sum(list)* -> retorna a soma do valores de uma lista. Utilizado em uma lista numerica.
 - *list.copy() ou list[:]* -> copia uma lista em outro endereço da memória.
 - *Nested list* -> uma lista de listas ou Matriz.
+- *extend(list)* -> adiciona elementos na lista.
 
 ## Estrutura de repetição
 #### for
@@ -202,6 +203,16 @@ São estrutura de dados que podemos percorrer seus elementos.
 - range()
 - set()
 
+
+## funções
+Funções em Python são definidas a partir da palavra reservada *def* seguido no nome da função e dois pontos (:)
+```def nome_funcao():```
+- Retorno de dados nas funções
+	- Para retornar dados utilizamos a palavra reservada *return*
+- Variáveis dentro do bloco da função só podem ser acessadas dentro do escopo da função.
+- Parâmetro nas funções ```def nome_completo(nome, sobrenome)```
+- Parâmetro pré-definido ```def nome_completo(nome, sobrenome = "Não informado")```
+- Parâmentro *keyword argument (\*\*kwargs)* 
 
 ## Tratamento de Exceções
 Métodos úteis:
