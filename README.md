@@ -128,6 +128,79 @@ while True:
 print(produtos)
 ```
 
+## Tuplas -> tuple()
+tuple() -> elementos devem ser separados por vírgula dentro de parenteses ().
+- É mais eficiente que as listas
+- É imutável
+- Acessos aos elementos
+```
+tupla = ('Fulano', 'de tal', '20-10-2000')
+#  por colchetes []
+tupla[0]
+# Desempacotamento
+nome, sobrenome, data_nasc = tupla
+```
+
+## Dicionário
+dict() -> chave:valor separados por vírgula dentro de chaves {}.
+- Chaves são únicas. Caso utilize repetidas o valor será atualizado.
+- Acessar elementos no dict() 
+	- Forma 1: Utilizamos a chave. ```dicionario['chave']``` dessa forma se a chave não existir retorna um KeyError.
+	- Forma 2: via *get()* ```dicionario.get('chave')``` dessa forma se a chave não existir retorna None. Uso recomendado.
+- Adicionar elementos no dict() 
+	- Forma 1: ```dicionario['chave'] = valor```
+	- Forma 2: via *update({})* ```dic1.update({'nova_chave': 'novo_valor'})```. Uso recomendado.
+- Remover elementos do dict()
+	- Forma 1: ```del dicionario['chave']```
+	- Forma 2: ```dicionario.pop('chave')``` retorna o valor removido.
+- Limpar o dicionário ```dicionario.clear()```
+
+**Métodos úteis de *dict()***
+
+-	*items()* ```dicionario.items()``` retorna uma lista[] de tuplas().
+- *keys()* ```dicionario.keys()``` 
+- *values()* ```dicionario.values()```
+- *fromkeys()* ```dicionario = dict.fromkeys(list, 0)``` Cria um dicionário com valor padrão 0.
+- *zip()* mescla lista e tranforma em tupla
+
+> items(), lembre-se de unpackage.
+
+#### Transformando dict() em list()
+```
+dicionario = {'notebook asus': 3000, 'notebook acer': 2500, 'notebook samsung': 2800}
+dict_chaves = dicionario.keys()
+dict_values = dicionario.values()
+print(dict_chaves)
+print(dict_values)
+# Convertendo para list()
+list_chaves = list(dict_chaves)
+list_values = list(dict_values)
+print(list_chaves)
+print(list_values)
+```
+
+#### Transformando list() ou tuple() em dict()
+- Se tiver uma lista utilize o método *fromkeys()* ```dicionario = dict.fromkeys(lista1, 0)```
+- Se tiver duas lista utilize o método *tupla = zip(lista1, lista2)* ```dicionario = dict(tupla)```
+
+## Conjunto - set()
+Um conjunto de dados apenas com valores e não duplicados. ```conjunto = {'arroz', 'feijão', 'farinha'}```
+- Transformando lista em conjunto ```conversao = set(lista)``` assim removemos valores duplicados.
+
+## Range()
+- range(tamanho) -> definimos o valor fim pelo tamanho.
+- range(inicio, fim) -> definimos o valor de inicio e fim
+- range(inicio, fim, passo) -> definimos o vlaor de inicio, fim e de quanto em quantos passos deve pular.
+
+
+## Iterable
+São estrutura de dados que podemos percorrer seus elementos.
+- string
+- list()
+- tuple()
+- dict()
+- range()
+- set()
 
 
 ## Tratamento de Exceções
