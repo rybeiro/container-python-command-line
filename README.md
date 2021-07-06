@@ -492,6 +492,53 @@ pass
 ### CSV
 - dataframe -> E uma tipo de tabela.
 - Para acessar as colunas acessamos como dicionário, passando a chave.
-- Para acessar as linhas acessmos como listas.
+- Para acessar as linhas acessmos como listas, passando o índice.
 - *dataframe.info()*
 
+**Importando arquivos**
+```python
+import pandas as pd
+
+dataframe_vendas = pd.read_csv(r'nome_arquivo.csv', sep=';') # separador padrão é vírgula
+dataframe_clientes = pd.read_csv(r'nome_arquivo.csv', sep=';')
+dataframe_lojas = pd.read_csv(r'nome_arquivo.csv', sep=';')
+# Para exibir
+display(dataframe_vendas)
+display(dataframe_clientes)
+display(dataframe_lojas)
+```
+
+- Removendo Colunas de um *dataframe*
+	- *drop()* parâmetro *axis=1*
+```python
+dataframe_nome.drop(['chave_coluna1', 'chave_coluna2', 'chave_coluna3'], axis=1)
+
+```
+- Removendo Linhas de um *dataframs*
+	- *drop()* por padrão remove linhas, mas por parâmentro é o *axis=0*
+```python
+dataframe_nome.drop([0:10]) #remove as linha 0 até 10 exclusive.
+```
+
+- Selecionando as colunas necessárias no *dataframe*
+```python
+dataframe_vendas = dataframe_vendas[['id_produto', 'nome_produto']]
+dataframe_clientes = dataframe_clientes[['id_cliente', 'email']]
+dataframe_lojas = dataframe_lojas[['id_loja', 'nome_loja']]
+```
+
+- Unificando (juntando) *dataframe* 
+	- *merge()*
+Importante para aplicar o *merge()* as colunas devem ter o mesmo nome nos *dataframes*. Se necessário renomeio o nome da coluna do *dataframe*
+```python
+novo_dataframe = dataframe_clientes.merge(dataframe_vendas, on='id_produto')
+```
+
+- Renomeando colunas
+	- *rename()*
+```python
+dataframe_clientes = dataframe_clientes.rename(columns={'emial': 'Email do cliente'})
+
+```
+
+> Problemas com charset podem ser resovidos com parâmetro *encoding='utf-8' ou encoding='iso-8859-1*
