@@ -535,10 +535,81 @@ novo_dataframe = dataframe_clientes.merge(dataframe_vendas, on='id_produto')
 ```
 
 - Renomeando colunas
-	- *rename()*
+	- *rename(coluna={'de':'para'})*
 ```python
 dataframe_clientes = dataframe_clientes.rename(columns={'emial': 'Email do cliente'})
 
 ```
 
+- Agrupar dados no dataframe
+	- *groupby('coluna')*
+```python
+
+dataframe_vendas_loja  = dataframe_vendas.groupby('nome_coluna').sum()
+```
+
+- Ordernar um dataframe
+	- *sort_values('coluna')*
+```python
+dataframe_vendas.sort_values('coluna')
+
+# ordem decrescente
+dataframe_vendas.sort_values('coluna', ascending=False)
+
+```
+
+> Analise idmax() e idmin()
 > Problemas com charset podem ser resovidos com parâmetro *encoding='utf-8' ou encoding='iso-8859-1*
+
+# Expressões Lambdas
+Expressões Lambdas ou Lambdas são funções anônimas.Para criar funções lambdas utilizamos a palavra reservada *lambda*
+
+```python
+# um uso de lambda, não convencional
+
+calc = lambda x: 3 * x
+
+# chamada
+calc(4)
+```
+
+Expressões *lambdas* com multiplos parâmetros
+```python
+nome_completo = lambda nome, sobrenome: "Olá "+ nome.strip().title() +" "+sobrenome.strip().title()
+```
+
+Exemplo mais útil para expressões lambdas
+```python
+# f(x) função quadratica
+def funcao_quadratica(a,b,c):
+    return lambda x: a * x ** 2 + b * x + c
+
+solucao = funcao_quadratica(3, 4, 2)
+
+solucao(2)
+# 3 * 2**2 + 4 * 2 + 2
+# 3 * 4 + 8 + 2
+# 12 + 10
+# 22
+```
+
+# Função Map
+*Map* é uma função que recebe 2 parâmetros, o primeiro é uma função e o segundo um iterável. **map(function, iteravel)** retorna um *Map Object*
+```python
+import math
+
+def area(raio):
+    return math.pi * raio ** 2
+
+
+raios = [14,3,0.4, 8.4]
+
+areas = map(area, raio)
+
+```
+Agora a operação acima usando **lambda**
+```python
+print(list(map(lambda r: math.pi * r ** 2, raios)))
+```
+
+> O **map()** depois de utilizado é excluído da memória.
