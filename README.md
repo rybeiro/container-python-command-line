@@ -564,6 +564,9 @@ dataframe_vendas.sort_values('coluna', ascending=False)
 # Expressões Lambdas
 Expressões Lambdas ou Lambdas são funções anônimas.Para criar funções lambdas utilizamos a palavra reservada *lambda*
 
+- Sintaxe sem parâmetro: *lambda: nome*
+- Sintaxe com parâmetro: *lambda x: 1 + x*
+
 ```python
 # um uso de lambda, não convencional
 
@@ -594,7 +597,12 @@ solucao(2)
 ```
 
 # Função Map
-*Map* é uma função que recebe 2 parâmetros, o primeiro é uma função e o segundo um iterável. **map(function, iteravel)** retorna um *Map Object*
+*Map* é uma função que recebe 2 parâmetros, o primeiro é uma função e o segundo um iterável. Retorna um *Map Object* e pode ser convertido para uma lista.
+
+O *map()* retorna um objeto mapeando a função para cada elemento do iterável.
+
+- Sintaxe: **map(function, iteravel)** 
+
 ```python
 import math
 
@@ -613,3 +621,30 @@ print(list(map(lambda r: math.pi * r ** 2, raios)))
 ```
 
 > O **map()** depois de utilizado é excluído da memória.
+
+# Filter
+O *filter()* serve para filtrar dados em uma coleção. Retorna um *filter Object* e pode ser convertido para uma lista.
+
+Ao aplicar o *filter()* é retornado um objeto apenas os elementos filtrados de acordo com a função.
+
+- Sintaxe: *filter(função, interável)*
+
+**Exemplo**
+```python
+import statistics
+dados = [2,4,9.3,7,23,0.74]
+
+media = statistics.mean(dados)
+
+print(f'A média é {media}')
+
+# utilizando filter() com lambda
+retorno = filter(lambda x: x > media, dados)
+
+print(list(retorno))
+```
+> O **filter()** depois de utilizado é excluído da memória.
+
+# Bibliotecas utilizadas nesse aprendizado
+- math -> Funções matemáticas
+- statistics -> Esse módulo fornece funções para o cálculo de estatísticas matemáticas de dados numéricos
