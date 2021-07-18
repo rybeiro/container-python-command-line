@@ -37,6 +37,8 @@
 		- *:x* Formato hexadecimal com letras Minúscula (geralmente utilizado em cores)
 		- *:X* Formato hexadecimal com letras Maiúscula (geralmente utilizado em cores)
 		- *:%* Formato percentual
+	- *min()* retorna o valor mínimo. Para utilizar função podemos utilizar a *key=lambda ...*
+	- *max* retorna o valor máximo. Para utilizar função podemos utilizar a *key=lambda ...*
 
 ### Interpolação
 - Forma 1: 
@@ -70,7 +72,7 @@ print(f"O valor R$ {variavel} é total da compra")
 
 Os blocos condicionais são definidos através de identação.
 
-```
+```python
 if condicao:
 	executa tudo que
 	estiver dentro da
@@ -307,7 +309,6 @@ O pacote fundamental para computação científica.
 ```python
 import numpy as np
 ```
-
 
 ## Instalar ou desinstalar módulos ou pacotes
 Utilizamos PIP para instalar pacotes ou módulos. PIP é o gerenciador de pactes do Python.
@@ -687,6 +688,52 @@ sorted([8,3,6,2,9]) # Crescente
 sorted([8,3,6,2,9], reverse=True) # Decrescente
 ```
 
+## Max
+*max()* Retorna o valor máximo 
+
+## Min
+*min()* Retorna o valor mínimo
+
+## Reversed
+A função *reversed(iteravel)* inverte a saída de qualquer iterával, com exceção de conjuntos (*set()*) que não mantém a ordem dos elementos.
+
+## Len
+O *len(list)* Retorna o tamanho do iterável. 
+
+## Abs
+*abs(num)* Retorna o valor absoluto de um número sem o sinal.
+
+## Sum
+*sum()* Retorna o somatória de uma determinado iterável
+
+## Round
+*round()* Retorna o valor arredondado para o *n* digito de precisão após a cada decimal.
+- *round(15.4)*
+- *round(15.5)*
+- *round(15.6)*
+- *round(15.6353, 2)*    arredondamento com precisão de 2 casas decimais.
+- *round(15.65567, 2)*   arredondamento com precisão de 2 casas decimais.
+- *round(15.6757788, 2)* arredondamento com precisão de 2 casas decimais.
+
+## Zip
+*zip()* Cria um iterável do tipo *Zip Object*.
+
+**Exemplos**
+```python
+prova1 = [9.7, 6.7, 7.8]
+prova2 = [5.5, 7.2, 6.8]
+alunos = ['Maria', 'Roger', 'Joaquina']
+
+media_final = zip(alunos, map(lambda: nota: max(nota), zip(prova1, prova2)))
+
+print(dict(media_final))
+
+# MODULARIZANDO A FUNÇÃO
+# Primeiro: list(zip(prova1, prova2)) # output: [(9.7, 5.5),(6.7, 7.2),(7.8, 6.8)]
+# Segundo : list(map(lambda nota: max(nota), [(9.7, 5.5),(6.7, 7.2),(7.8, 6.8)])) # output: [9.7, 7.2, 7.8]
+# Terceiro: dict(zip(alunos, [9.7, 7.2, 7.8])) # output: {'Maria': 9.7, 'Roger': 7.2, 'Joaquina': 6.8} 
+```
+
 
 ### Benchmark -> Avaliando o desempenho computacional de cada Comprehension
 
@@ -706,13 +753,6 @@ get_comp = getsizeof((x * 2 for x in range(1000)))
 print(f'Tamanho da memória alocada: {get_comp} bytes')
 
 ```
-
-
-
-
-
-
-
 
 # Bibliotecas utilizadas nesse aprendizado
 - math -> Funções matemáticas
