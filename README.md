@@ -80,9 +80,9 @@ if condicao:
 ### Operadores de comparação
 - == (igualdade)
 - != (diferente)
-- > (maior que)
+- \> (maior que)
 - < (menor que)
-- >= (maior ou igual à)
+- \>= (maior ou igual à)
 - <= (menor ou igual à)
 - in (encontrar um texto ou caracter dentro de outro texto)
 - not (verifica o contrário da comparação. Inverte o resultado)
@@ -596,7 +596,7 @@ solucao(2)
 # 22
 ```
 
-# Função Map
+## Função Map
 *Map* é uma função que recebe 2 parâmetros, o primeiro é uma função e o segundo um iterável. Retorna um *Map Object* e pode ser convertido para uma lista.
 
 O *map()* retorna um objeto mapeando a função para cada elemento do iterável.
@@ -622,7 +622,7 @@ print(list(map(lambda r: math.pi * r ** 2, raios)))
 
 > O **map()** depois de utilizado é excluído da memória.
 
-# Filter
+## Filter
 O *filter()* serve para filtrar dados em uma coleção. Retorna um *filter Object* e pode ser convertido para uma lista.
 
 Ao aplicar o *filter()* é retornado um objeto apenas os elementos filtrados de acordo com a função.
@@ -645,6 +645,78 @@ print(list(retorno))
 ```
 > O **filter()** depois de utilizado é excluído da memória.
 
+## Reduce
+A função *reduce()* está disponível na biblioteca functools.
+
+- Sintaxe: *reduce(função, interável)*
+
+> ATENÇÃO: Utilize a função *reduce()* se realmente precisar dela. Tem casos que um *loop for* resolverá. Fonte: **Guido Van Rossum**
+
+## All
+*all()* Retorno boolean. Retorna *True* se todos os elementos do iterável são verdadeiros ou ainda está vazio.
+
+**Exemplo**
+```python
+numeros = [0,1,2,3,4]
+print(all(numeros)) # False, porque o 0 (zero) é False
+
+numeros = [1,2,3,4,5]
+print(all(numeros)) # True 
+```
+
+## Any
+*any()* Retorno boolean. Retorna *True* se qualquer elemento do iterável for verdadeiro.
+
+## Generators expression ou Tuple Comprehension
+É muito mais performatico que os demais Comprehension.
+
+**Exemplo**
+```python
+gen = (x * 2 for x in range(1000))
+
+print(gen)
+
+```
+
+## Sorted
+É *sorted()* utilizado para ordernar qualquer iterável. Diferentemente do *sort()* que só ordena no *list()* gerando uma nova lista ordenada. Porém o *sorted()* não altera a lista original.
+
+- Sintaxe: 
+```python
+sorted([8,3,6,2,9]) # Crescente
+sorted([8,3,6,2,9], reverse=True) # Decrescente
+```
+
+
+### Benchmark -> Avaliando o desempenho computacional de cada Comprehension
+
+```python
+from sys import getsizeof
+
+list_comp = getsizeof([x * 2 for x in range(1000)])
+print(f'Tamanho da memória alocada: {list_comp} bytes')
+
+set_comp = getsizeof({x * 2 for x in range(1000)})
+print(f'Tamanho da memória alocada: {set_comp} bytes')
+
+dict_comp = getsizeof({x: x * 2 for x in range(1000)})
+print(f'Tamanho da memória alocada: {dict_comp} bytes')
+
+get_comp = getsizeof((x * 2 for x in range(1000)))
+print(f'Tamanho da memória alocada: {get_comp} bytes')
+
+```
+
+
+
+
+
+
+
+
 # Bibliotecas utilizadas nesse aprendizado
 - math -> Funções matemáticas
 - statistics -> Esse módulo fornece funções para o cálculo de estatísticas matemáticas de dados numéricos
+- functools
+- sys
+	- getsizeof('TExto') - Retorna o tamanho em bytes alocado na mémoria de um determinado parâmetro.
