@@ -432,24 +432,6 @@ print(filtrar_produto_acima5000)
 ## Collections
 - *Counter* Podemos utilizar para exibir o top 10 produtos por exemplo, utilizando a função most_common(10)
 
-## Tratamento de Exceções
-Métodos úteis:
-- *try* tenta executar e *except* faz outra coisa.
-- *raise Exception()* ou *raise ValueError()* ou *raise ZeroDivisionError()*
-```python
-try:
-	Tenta executar um código
-except:
-	Deu um erro inesperado e aqui podemos retornar o erro ou uma mensagem.
-	raise ValueError("O @ não foi informado")
-else:
-	se a execução no try for bem sucedida executa o código que está aqui
-finally:
-	Independetemente o que acontecer ele será executado
-
-```
-
-
 ## Métodos reservados do Python
 - Cria uma lista a partir do texto, quebrando-o no espaço em branco.
 ```python
@@ -753,6 +735,120 @@ get_comp = getsizeof((x * 2 for x in range(1000)))
 print(f'Tamanho da memória alocada: {get_comp} bytes')
 
 ```
+
+# Tratamento de Exceções
+Métodos úteis:
+- *try e except*
+	- *try* tenta executar e caso ocorra um erro entra no *except* e aqui podemos tratar o erro exibindo uma mensagem personalizada para o usuário.
+- *try, except e else*
+	- *try* tenta executar e caso ocorra um erro entra no *except* e caso contrário entra no *else* para executar outra instrução.
+- *try, except, else e finally*
+
+**Exemplos**
+```python
+### try e except
+# vai tentar executar uma função que não existe. Isso gera o erro de NameError porque a função não foi definida.
+# mas o erro não será exibido porque ao utilizar o except informamos ao python o pass para não fazer nada.
+# tratamos de forma genérica.
+try:
+	tente()
+except:
+	pass
+
+
+# Vamos enviar uma mensagem de erro personalizada.
+try:
+	tentar()
+except:
+	print("Ops! Algo de errado aconteceu e o sistema não executou como esperado, informe o Administrador do Sistema")
+
+
+# Além de informar ao usuário uma mensagem vamos exibir o erro, nesse caso temos que saber o tipo de erro é de NameError
+try:
+	tentar()
+except NameError as erro:
+	print("Ops! Algo de errado aconteceu e o sistema não executou como esperado, informe o Administrador do Sistema")
+	print(f"Erro: {erro}")
+
+
+### try, except e else
+# Tratando entrada do usuário. Nesse exemplo esperamos que ele digite apenas números.
+# Caso 1: Entrada correta, valor digitado 15
+# Nesse caso o sistema vai executar normalmente e imprimir a mensagem que está fora do tratamento.
+try:
+	num = int(input("Entre com o valor do desconto"))
+except ValueError as erro:
+	print("Ops! Entrada inválida, digite apenas numéros")
+
+print(f"O valor informando é de: {num}")
+
+# Caso 2: Entrada incorreta, valor digitado gentalha
+# Nesse caso vai cair na exceção e imprimir a mensagem de erro MAS também vai gerar um erro no print de fora do bloco porque não inicializamos a variável num que recebe o valor dentro do try. E para tratar isso precisamos utilizar o else no caso 3.
+try:
+	num = int(input("Entre com o valor do desconto"))
+except ValueError as erro:
+	print("Ops! Entrada inválida, digite apenas numéros")
+
+print(f"O valor informando é de: {num}")
+
+# Caso 3: 
+# Entrada correta vai para o else
+# Entrada incorreta vai para o except
+try:
+	num = int(input("Entre com o valor do desconto"))
+except ValueError as erro:
+	print("Ops! Entrada inválida, digite apenas numéros")
+else
+	print(f"O valor informando é de: {num}")
+
+
+### try, except, else e finally
+# Caso 1:
+# A instrução finally sempre será executa, independentemente se entrar no except ou no else
+try:
+	num = int(input("Entre com o valor do desconto"))
+except ValueError as erro:
+	print("Ops! Entrada inválida, digite apenas numéros")
+else
+	print(f"O valor informando é de: {num}")
+finally:
+	print("Sempre será executado.")
+
+```
+
+**Tratamento de vários erros possíveis**
+- Para tratar vários erros possíveis utilize uma tupla.
+```python
+# Divisão que pode gerar erro nos casos de divisão por zero ou usuário inserir letras ao invés de números.
+
+def divisao(a, b):
+	try:
+		return int(a) / int(b)
+	except (ValueError, ZeroDivisionError, TypeError):
+		return "Ops! Verifique os Dividendo e o Divisor"
+
+num1 = input("Dividendo")
+num2 = input("Divisor")
+
+divisao(num1, num2)
+```
+
+> O finally poderia ser usado para fechar uma conexão com o banco de dados independentemente do que ocorra com a tentativa de conexão, Se sucesso ou insucesso.
+
+# Python Debugger
+Deve-se importar a biblioteca pdb *import pdb*
+
+#### Lista de comandos básicos
+- l -> lista o código
+- n -> vai para próxima linha
+- p -> imprime variável
+- c -> continua a execução
+
+**Nas versões anteriores ao 3.7** utilizar o *set_trace()* e importar o python debugger
+O ponto para debugar o código deve-se utilizar o *set_trace()* antes da linha depois utilizar os comandos básicos para interagir com o python debugger.
+
+**Nas versões posterior ao 3.7** Não é necessário importar a biblioteca, basta chamar a função *built-in, brackpoint()* 
+
 
 # Bibliotecas utilizadas nesse aprendizado
 - math -> Funções matemáticas
