@@ -975,7 +975,7 @@ print(funcao1())
 def funcao1():
 	return "Função 1"
 
-if __name__ == __main__:
+if __name__ == '__main__':
 	print(funcao1())
 ```
 
