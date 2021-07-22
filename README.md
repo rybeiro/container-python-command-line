@@ -739,16 +739,19 @@ print(f'Tamanho da memória alocada: {get_comp} bytes')
 # Tratamento de Exceções
 Métodos úteis:
 - *try e except*
-	- *try* tenta executar e caso ocorra um erro entra no *except* e aqui podemos tratar o erro exibindo uma mensagem personalizada para o usuário.
+	- *try* tenta executar e caso ocorra um erro entra no *except* e aqui 
+	podemos tratar o erro exibindo uma mensagem personalizada para o usuário.
 - *try, except e else*
-	- *try* tenta executar e caso ocorra um erro entra no *except* e caso contrário entra no *else* para executar outra instrução.
+	- *try* tenta executar e caso ocorra um erro entra no *except* e caso 
+	contrário entra no *else* para executar outra instrução.
 - *try, except, else e finally*
 
 **Exemplos**
 ```python
 ### try e except
-# vai tentar executar uma função que não existe. Isso gera o erro de NameError porque a função não foi definida.
-# mas o erro não será exibido porque ao utilizar o except informamos ao python o pass para não fazer nada.
+# vai tentar executar uma função que não existe. Isso gera o erro de NameError
+# porque a função não foi definida. mas o erro não será exibido porque ao 
+# utilizar o except informamos ao python o pass para não fazer nada.
 # tratamos de forma genérica.
 try:
 	tente()
@@ -760,21 +763,26 @@ except:
 try:
 	tentar()
 except:
-	print("Ops! Algo de errado aconteceu e o sistema não executou como esperado, informe o Administrador do Sistema")
+	print("Ops! Algo de errado aconteceu e o sistema não executou como" + 
+		"esperado informe o Administrador do Sistema")
 
 
-# Além de informar ao usuário uma mensagem vamos exibir o erro, nesse caso temos que saber o tipo de erro é de NameError
+# Além de informar ao usuário uma mensagem vamos exibir o erro, nesse caso
+#  temos que saber o tipo de erro é de NameError
 try:
 	tentar()
 except NameError as erro:
-	print("Ops! Algo de errado aconteceu e o sistema não executou como esperado, informe o Administrador do Sistema")
+	print("Ops! Algo de errado aconteceu e o sistema não executou como "+
+		"esperado informe o Administrador do Sistema")
 	print(f"Erro: {erro}")
 
 
 ### try, except e else
-# Tratando entrada do usuário. Nesse exemplo esperamos que ele digite apenas números.
+# Tratando entrada do usuário. Nesse exemplo esperamos que ele digite
+#  apenas números.
 # Caso 1: Entrada correta, valor digitado 15
-# Nesse caso o sistema vai executar normalmente e imprimir a mensagem que está fora do tratamento.
+# Nesse caso o sistema vai executar normalmente e imprimir a mensagem 
+# que está fora do tratamento.
 try:
 	num = int(input("Entre com o valor do desconto"))
 except ValueError as erro:
@@ -783,7 +791,10 @@ except ValueError as erro:
 print(f"O valor informando é de: {num}")
 
 # Caso 2: Entrada incorreta, valor digitado gentalha
-# Nesse caso vai cair na exceção e imprimir a mensagem de erro MAS também vai gerar um erro no print de fora do bloco porque não inicializamos a variável num que recebe o valor dentro do try. E para tratar isso precisamos utilizar o else no caso 3.
+# Nesse caso vai cair na exceção e imprimir a mensagem de erro MAS também 
+# vai gerar um erro no print de fora do bloco porque não inicializamos a 
+# variável num que recebe o valor dentro do try. E para tratar isso precisamos
+#  utilizar o else no caso 3.
 try:
 	num = int(input("Entre com o valor do desconto"))
 except ValueError as erro:
@@ -804,7 +815,8 @@ else
 
 ### try, except, else e finally
 # Caso 1:
-# A instrução finally sempre será executa, independentemente se entrar no except ou no else
+# A instrução finally sempre será executa, independentemente se entrar no 
+# except ou no else
 try:
 	num = int(input("Entre com o valor do desconto"))
 except ValueError as erro:
@@ -819,7 +831,8 @@ finally:
 **Tratamento de vários erros possíveis**
 - Para tratar vários erros possíveis utilize uma tupla.
 ```python
-# Divisão que pode gerar erro nos casos de divisão por zero ou usuário inserir letras ao invés de números.
+# Divisão que pode gerar erro nos casos de divisão por zero ou usuário inserir
+# letras ao invés de números.
 
 def divisao(a, b):
 	try:
@@ -833,7 +846,138 @@ num2 = input("Divisor")
 divisao(num1, num2)
 ```
 
-> O finally poderia ser usado para fechar uma conexão com o banco de dados independentemente do que ocorra com a tentativa de conexão, Se sucesso ou insucesso.
+> O finally poderia ser usado para fechar uma conexão com o banco de dados
+ independentemente do que ocorra com a tentativa de conexão, Se sucesso ou insucesso.
+
+# Módulos
+Em Python módulos são arquivos python (.py). Em um módulo existem várias funções
+disponíveis.
+
+#### Importando módulos
+Existe duas formas de importar os módulos:
+- Forma 1: Importar o módulo completo, ou seja, todas as funções, atributos,
+ propriedades ou classes pertecentes ao módulo. Isso ficará alocado em memória.
+ **(Não recomendado)**
+	- *import nome_do_modulo*
+- Forma 2: Importar apenas a função à utlizar **(recomendado)**
+	- *from nome_modulo import nome_funcao*
+
+> Importante para saber quais funções tem no módulo utilize o *dir()*
+
+**Exemplos**
+```python
+# importando o Módulo random disponibilizará todos as funções
+# 
+import random
+
+# para saber quais funções estão disponíveis nesse Módulo basta consultar a
+# documentação dir(random).
+dir(random)
+
+# Nesse caso identificamos que o módulo random tem a função random para saber o
+# que essa função faz podemos utilizar o help(random.random)
+
+help(random.random)
+
+print(random.random())
+
+# Importando apenas a função uniform() do Módulo random
+# A função uniform() gera números pré-estabelecido entre valores determinados
+from random import uniform
+
+for i in range(10):
+	print(uniform(3,7))
+
+
+# Função randint() -> gera números inteiros entre um determinado intervalo
+from random import randint
+
+for i in range(6):
+	# Números para o sorteio da Mega-sena do 1 ao 60
+	# o parâmentro end=', ' é um separador para a saída
+	print(randint(1, 61, end=', '))
+
+# Função choice()  -> retorna um valor aleatório de um determinado iterável.
+from random import choice 
+jogadas = [('pedra', 1), ('papel', 2), ('tesoura', 3)]
+print(choice(jogadas))
+
+# Função shuffle -> mistura a ordem dos elementos aleatoriamente
+from random import shuffle
+cartas = ['A', '2', '3', '4', '5', '6', '7', 'Q', 'J', 'K']
+print(cartas)
+shuffle(cartas)
+print(cartas)
+
+# Importando todo o módulo sem precisar passar o nome do Módulo
+from random import *
+
+print(uniform(1, 10))
+```
+
+### Módulos built-in
+São Módulos integrados que já vem instalados no Python (https://docs.python.org/3/py-modindex.html)
+
+
+### Módulos externos
+Para instalar módulos externos criados pela comunidade utilizamos o PIP.
+
+Os módulos estão disponíveis (https://pypi.org)
+
+
+# Pacotes
+É um diretório que contém vários Módulos, ou seja, arquivos Python (.py)
+
+**OBS:** Nas versões 2.x do Python para utilizar os módulos é obrigatório existir 
+um arquivo *Dunder __init__.py*. Nas versões 3.x não é obrigatório, mas é utilizado 
+para manter a compatibilidade.
+
+Para utilizar os pacotes podemos importa-los da mesma maneira que fizemos 
+com os módulos.
+
+```python
+# Lembre-se que os pacotes são diretórios
+from diretorio1 import funcao1
+
+print(funcao1())
+
+
+# Se dentro do pacote existe outros pacotes, ou seja, sub-diretórios
+from diretorio1.subdiretorio import funcao2
+
+print(funcao2())
+```
+
+# Dunder Main e Name
+*Dunder* significa Doble Under
+
+*__main__* é o arquivo principal o que será executado
+
+*__name__* é o nome do arquivo que está sendo importado.
+
+A partir da execução de um arquivo Python diretamente na linha de comando, 
+o python internamente atribui o valor de *__main__* na variável *__name__* em 
+indicando que é um módulo de execução.
+
+O que está dentro do *__name__ ou __main__* só será exeutado se o próprio 
+arquivo for executado.
+
+**Exemplo para compreensão**
+```python
+# Considere o Módulo com o nome primeiro.py
+# Esse arquivo se for importado executará o print() implicitamente
+def funcao1():
+	return "Função 1"
+
+print(funcao1())
+
+# Para evitar chamada implicitas utilizamos o Dunder __name__
+def funcao1():
+	return "Função 1"
+
+if __name__ == __main__:
+	print(funcao1())
+```
 
 # Python Debugger
 Deve-se importar a biblioteca pdb *import pdb*
@@ -845,14 +989,17 @@ Deve-se importar a biblioteca pdb *import pdb*
 - c -> continua a execução
 
 **Nas versões anteriores ao 3.7** utilizar o *set_trace()* e importar o python debugger
-O ponto para debugar o código deve-se utilizar o *set_trace()* antes da linha depois utilizar os comandos básicos para interagir com o python debugger.
+O ponto para debugar o código deve-se utilizar o *set_trace()* antes da linha 
+depois utilizar os comandos básicos para interagir com o python debugger.
 
-**Nas versões posterior ao 3.7** Não é necessário importar a biblioteca, basta chamar a função *built-in, brackpoint()* 
+**Nas versões posterior ao 3.7** Não é necessário importar a biblioteca, basta 
+chamar a função *built-in, brackpoint()* 
 
 
 # Bibliotecas utilizadas nesse aprendizado
 - math -> Funções matemáticas
-- statistics -> Esse módulo fornece funções para o cálculo de estatísticas matemáticas de dados numéricos
+- statistics -> Esse módulo fornece funções para o cálculo de estatísticas 
+matemáticas de dados numéricos
 - functools
 - sys
 	- getsizeof('TExto') - Retorna o tamanho em bytes alocado na mémoria de um determinado parâmetro.
