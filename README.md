@@ -979,6 +979,59 @@ if __name__ == '__main__':
 	print(funcao1())
 ```
 
+# Files
+Para leitura de arquivos em Python utilizamos a função nativa *open()* que 
+retorna um objeto *io.TextIOWrapper*
+
+Para exibir informações do arquivo basta dar um *print* na saída.
+```python
+# Abrindo um arquivo e obtendo informações.
+arquivo = open('edital.pdf')
+print(arquivo)
+# output: <_io.TextIOWrapper name='PDF/edital.pdf' mode='r' encoding='UTF-8'>
+print(type(arquivo))
+# output: <class '_io.TextIOWrapper'>
+
+# Para ler o conteúdo do arquivo utiliza-se read()
+print(arquivo.read())
+arquivo.close()
+```
+
+## Seek e Cursor
+*seek()* é a função que movimenta o cursor no arquivo. Essa função recebe um
+parâmentro que indica onde queremos posicionar o cursor quando ele atige o 
+final do arquivo.
+
+```python
+arquivo.open('PDF/edital.pdf')
+arquivo.read()
+arquvo.seek(0) # posiciona o cursor no inicio do arquivo
+arquivo.read()
+print(arquivo.closed) # False (arquivo ainda aberto)
+arquivo.close()
+print(arquivo.closed) # True (Arquivo fechado)
+
+# with -> bloco que utilizado para trabalhar com recurso e fecha-los após o uso.
+with open('PDF/edital.pf') as arquivo:
+	print(arquivo.readlines())
+
+# a partir daqui o arquivo não existe mais porque a conexão já foi fechada.
+
+```
+
+- *read()* retorna todas as linhas/páginas do arquivo.
+	- *read(50)* podemos retornar uma determinada quantidade de caracteres.
+- *readline()* retornar uma linha do arquivo.
+- *readlines()* retorna todas as linhas do arquivo em um *list()*
+- *close()* fecha o arquivo.
+- *closed* verifica se o arquivo está aberto ou fechado. Retorna um *boolean*.
+- *with* Forma Pythônica. É um bloco utilizado para trabalhar com o arquivo e após sair do bloco
+o mesmo é fechado.
+
+> Ao abrir um arquivo com *open()* é criada um conexão entre o arquivo
+e o disco. Essa conexão é chamada de *streaming* é sempre recomendado
+fechar essa conexão depois de trabalhar com o arquivo.
+
 # Python Debugger
 Deve-se importar a biblioteca pdb *import pdb*
 
