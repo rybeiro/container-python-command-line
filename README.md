@@ -1110,6 +1110,54 @@ os.path.join()
 # listdir() -> lista o conteúdo de um diretório
 os.listdir()
 
+# scandir() -> consultar
+
+# verificar se o diretorio ou arquivo existe
+os.path.exists('arquivo.txt')
+os.path.exists('diretorio')
+
+# Criar arquivos em branco
+os.mknod('arquivo-teste.txt')
+
+# Criar diretório, mkdir cria apenas um diretório
+os.mkdir('teste')
+
+# Criar árvore de diretorios
+os.makedirs('teste/teste1/teste2/teste3')
+
+# Criar árvore de diretórios checando se já existe.
+os.makedirs('teste/teste1/teste2', exist_ok=True)
+
+# Renomer arquivos ou diretórios
+os.rename('teste1', 'teste4') # Diretorios
+os.rename('arquivo.txt', 'novo_arquivo.txt') # Arquivos
+
+# Remover arquivos
+os.remove('arquivo.txt')
+
+# Remover diretórios -> Remove diretorio vazio
+os.rmdir('teste1')
+
+# Remover árvore de diretórios -> Remove diretorios vazios
+os.removedirs('teste1/teste/2/teste3')
+
+# Criando diretórios temporários
+import filetemp
+with filetemp.TemporaryDirectory() as tmp:
+	print(f'Foi criado um diretório temporario em {tmp}')
+	with open(os.path.join(tmp, 'arquivo_temp.txt'), 'w') as arquivo:
+		arquivo.write("Foi criado um arquivo temporário")
+	input() # Usado apenas para segurar o terminal e podermos validar que foi criado.
+
+# Criando um arquivo temporário -> Em arquivos temporários só conseguimos escrever
+# bits
+import filetemp
+with file.TemporaryFile() as tmp:
+	tmp.write(b'Teste de escrita') # O b representa o Mode bits
+	tmp.seek(0)
+	print(tmp.read())
+
+
 
 ```
 
