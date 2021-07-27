@@ -980,6 +980,10 @@ if __name__ == '__main__':
 ```
 
 # Files
+Para ler ou escrever dados em um arquivo do sistema operacional o script
+precisa de ter permissão.
+
+#### Lendo os arquivos
 Para leitura de arquivos em Python utilizamos a função nativa *open()* que 
 retorna um objeto *io.TextIOWrapper*
 
@@ -996,6 +1000,56 @@ print(type(arquivo))
 print(arquivo.read())
 arquivo.close()
 ```
+> O Mode r (read) é o padrão da função open()
+
+#### Escrevendo em arquivos
+```python
+# O Mode w (write) nos permite escreve no arquivo até que o mesmo seja fechado
+# como o uso do with envolvemos em um bloco e portanto ao sair ele fechará
+# automáticamento.
+with open('novo.txt', 'w') as arquivo:
+	arquivo.write("Escrevendo em um arquivo")
+	arquivo.write("Continuamos a escrever no arquivo")
+	arquivo.write("Vamos finalizar aqui.")
+
+# Escrevendo a partir de interação do usuaário
+with open('frutas.txt', 'w') as frutas:
+	print("Para encerrar o sistema escreva sair")
+	while True:
+		fruta = input("Informe o nome de uma fruta")
+		if fruta == 'sair':
+			break
+		frutas.write(fruta)
+```
+
+> O Mode w (write) na função *open()* se chamado ele sobreescreve o conteúdo 
+do arquivo. Se o arquivo não existir ele criará. 
+
+> **IMPORTANTE: Forma Pythônica** O uso do bloco *with* garante que o arquivo será fechado
+imediatamento quando o bloco finalizar.
+
+### Mode para abrir arquivos
+- **r** Abre para leitura open('arquivo.txt')
+- **w** Abre para escrita *open('arquivo.txt', 'w')* Essa operação sobreescre o
+conteúdo do arquivo.
+- **a** Abre para escrita como *append* open('arquivo.txt', 'a'). Adiciona no
+final do arquivo.
+- **+** Abre o arquivo para escrita e leitura. Modo de atualização. Tem que 
+combinar com outro modo *open('arquivo.txt', 'a+')*
+
+## StringIO
+Utilizado para ler e criar arquivos na mémoria. é necessário importa-lo
+do pacote *io*
+
+```python
+from io import StringIO
+
+arquivo = StringIO("aqui vai o texto")
+arquivo.read()
+arquivo.write("adicionado novo texto")
+arquivo.seek(0)
+arquivo.read()
+```
 
 ## Seek e Cursor
 *seek()* é a função que movimenta o cursor no arquivo. Essa função recebe um
@@ -1003,7 +1057,7 @@ parâmentro que indica onde queremos posicionar o cursor quando ele atige o
 final do arquivo.
 
 ```python
-arquivo.open('PDF/edital.pdf')
+arquivo.open('PDF/edital.txt')
 arquivo.read()
 arquvo.seek(0) # posiciona o cursor no inicio do arquivo
 arquivo.read()
@@ -1031,6 +1085,35 @@ o mesmo é fechado.
 > Ao abrir um arquivo com *open()* é criada um conexão entre o arquivo
 e o disco. Essa conexão é chamada de *streaming* é sempre recomendado
 fechar essa conexão depois de trabalhar com o arquivo.
+
+# Sistemas de arquivos
+Para manipulação de arquivos no Python é necessário importar o módulo *os*.
+
+```python
+import os
+# getcwd() -> retorna o caminho absoluto.
+os.getcwd()
+
+# chdir() -> Alterando o diretório
+os.chdir('..')
+
+# name() -> retorna o sistema de arquivo do sistema operacional
+os.name()
+
+# uname() -> Detalhes do sistema operaciona
+os.uname() 
+
+# path.join() -> Junta os diretórios separando as barras de acordo
+# o sistema operacional
+os.path.join()
+
+# listdir() -> lista o conteúdo de um diretório
+os.listdir()
+
+
+```
+
+
 
 # Python Debugger
 Deve-se importar a biblioteca pdb *import pdb*
