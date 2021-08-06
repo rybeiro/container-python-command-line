@@ -1161,8 +1161,6 @@ with file.TemporaryFile() as tmp:
 
 ```
 
-
-
 # Python Debugger
 Deve-se importar a biblioteca pdb *import pdb*
 
@@ -1179,11 +1177,240 @@ depois utilizar os comandos básicos para interagir com o python debugger.
 **Nas versões posterior ao 3.7** Não é necessário importar a biblioteca, basta 
 chamar a função *built-in, brackpoint()* 
 
-
-# Bibliotecas utilizadas nesse aprendizado
+# Algumas Bibliotecas utilizadas
 - math -> Funções matemáticas
 - statistics -> Esse módulo fornece funções para o cálculo de estatísticas 
 matemáticas de dados numéricos
 - functools
 - sys
 	- getsizeof('TExto') - Retorna o tamanho em bytes alocado na mémoria de um determinado parâmetro.
+
+# Iterator e Iterables
+- *Iterator* é um objeto que pode ser iterável e que retornar uma elemento por
+ vez quando a função *next()* for chamada.
+ - *Iterable* um objeto que retorna um *iterator* quando a função *iter()* é chamada.
+
+**Exemplo**
+```python
+nome = 'Nome' # É um iterable mas não é iterator
+numeros = [1,2,3,4,5,6] # É um iterable mas não é iterator
+
+print(next(nome)) # Aqui é um iterable.
+# Lembre-se que um objeto iterator tem a função next()
+# nesse exemplo vemos que a variável nome é uma str
+# TypeError: 'str' object is not an iterator
+
+print(next(numeros)) 
+# TypeError: 'list' object is not an iterator
+
+# Mas podemos transformar essas variáveis em iterator através da função iter()
+# Posteriormente acessar os elementos com a função next()
+nome = iter(nome)
+type(nome)
+print(next(nome))
+
+numeros = iter(numeros)
+type(numeros)
+print(numeros)
+```
+
+# Orientação objeto - Python
+É o paradigma de programação que utiliza mapeamento de objetos do mundo real 
+para modelos computacionais.
+
+#### Principais elementos de POO
+- Classe: Modelo do objeto do mundo real sendo representado computacionalmente.
+- Atributos: Características do objeto
+- Métodos: Comportamento do objeto (funções)
+- Construtor: Método especial utilizado para criar os objetos.
+- Objeto: Instância da class. Tipo de dado complexo.
+
+Em Python atributos são declarados dentro do construtor.
+
+Sintaxe: construtor padrão 
+```python
+def __init__(self):
+```
+
+> *self* é o próprio objeto da classe ou referência de instância.
+
+### Atributos
+
+
+### Métodos (funções)
+Representam o comportamento do objeto, ou seja, as funções que ele pode 
+realizar no sistema.
+
+O nome dos métodos devem ser escrito com letras minúsculas se for composto
+deve-se separar por underline.
+
+#### Método de Instância
+São os métodos que precisamos de uma instância para ter acesso.
+
+```python
+
+class Pessoa:
+
+	def __init__(self, nome, sobrenome):
+		self.__nome = nome # atributo privado representado por __
+		self.__sobrenome = sobrenome
+
+
+	# Método de Instância, necessitam da instância para ser acessados
+	def saudacao(self):
+		return f"Seja bem vindo, {self.__nome} {self.__sobrenome}"
+
+
+p1 = Pessoa('Nome', 'Sobrenome')
+
+p1.saudacao()
+```
+
+#### Métodos de Classe
+São conhecido como métodos estáticos em outras linguagens, mas a diferença
+é principalmente por ter o decorador *@classmethod* e o parâmetro *cls*
+
+```python
+class Pessoa:
+
+	contador = 0
+
+	@classmethod # Decorador de classe
+	def contador_de_usuarios(cls):
+		print(f'Temos {cls.contador} online')
+
+	def __init__(self, nome, sobrenome):
+		self.__nome = nome # atributo privado representado por __
+		self.__sobrenome = sobrenome
+
+
+	# Método de Instância, necessitam da instância para ser acessados
+	def saudacao(self):
+		return f"Seja bem vindo, {self.__nome} {self.__sobrenome}"
+
+
+p1 = Pessoa('Nome', 'Sobrenome')
+
+p1.saudacao()
+
+```
+
+#### Método Estático
+Método estático é acompanhado do decorador *@staticmethod*
+```python
+
+class Pessoa:
+
+	contador = 0
+
+	@staticmethod
+	def definicao():
+		return Pessoa.contador + 1
+
+Pessoa.definicao()
+```
+
+#### Herança (Inheritance)
+A idéia de herança é reaproveitamento de código e também a possibilidade de
+extender as classes.
+
+A Herança nos permite extender atributos e métodos.
+
+Para entender melhor o uso de herança usaremos como exemplo duas entidades 
+com mesmos atributos e métodos.
+```python
+
+# Classe cliente
+class Cliente:
+	def __init__(self, nome, sobrenome, cpf, salario):
+		self.__nome = nome
+		self.__sobrenome = sobrenome
+		self.__cpf = cpf
+		self.__salario = salario
+
+	def nome_completo(self):
+		return f'{self.__nome} {self.__sobrenome}'
+
+# Classe Funcionario
+class Funcionario:
+	def __init__(self, nome, sobrenome, cpf, matricula):
+		self.__nome = nome
+		self.__sobrenome = sobrenome
+		self.__cpf = cpf
+		self.__matricula = matricula
+
+	def nome_completo(self):
+		return f'{self.__nome} {self.__sobrenome}'
+
+# Perceba que essas duas Entidades tem atributos e método iguais
+# Agora temos que responder a pergunta abaixo
+## Existe alguma entidade genérica suficiente para encapsular os atributos 
+## e métodos comuns em outras entidades?
+### Nesse exemplo, Sim. Ambas as Classes tem atributos de uma Pessoa.
+
+# Refatorando as classes e aplicando herança
+class Pessoa:
+	def __init__(self, nome, sobrenome, cpf):
+		self.__nome = nome
+		self.__sobrenome = sobrenome
+		self.__cpf = cpf
+
+	def nome_completo(self):
+		return f'{self.__nome} {self.__sobrenome}'
+
+
+class Cliente(Pessoa):
+	def __init__(self, nome, sobrenome, cpf, salario):
+		super().__init__(nome, sobrenome, cpf)
+		self.__salario = salario
+
+
+class Funcionario(Pessoa):
+	def __init__(self, nome, sobrenome, cpf, matricula):
+		super().__init__(nome, sobrenome, cpf)
+		# ou
+		# Animal.__init__(self, nome, sobrenome, cpf)
+		self.__matricula = matricula
+
+	# sobreescrita de método
+
+	def nome_completo(self):
+		return f'{self._Pessoa__nome} {self._Pessoa__sobrenome} o número de sua matricula é {self.__matricula}'
+
+```
+
+> Para usar herança é importante responder a essa pergunta: 
+> Existe alguma entidade genérica suficiente para encapsular os atributos 
+> e métodos comuns em outras entidades?
+
+#### Propriedades (Getters e Setters)
+No Python utiliza-se **Decoradores (Decorators)** para *getters* e *setters*
+```python
+
+# Refatorando a Classe Pessoa
+
+class Pessoa:
+	def __init__(self, nome, sobrenome, cpf):
+		self._nome = nome
+		self._sobrenome = sobrenome
+		self._cpf = cpf
+
+
+	# Uso de decoradores para getters
+	@property
+	def nome(self):
+		return self._nome
+	
+	# Uso de decoradores para setters
+	@nome.setter
+	def nome(self, nome):
+		self._nome = nome
+
+
+p1 = Pessoa('Fabio', 'Ribeiro', '123.456.789-00')
+
+print(p1.nome) # get nome
+p1.nome = 'João'
+print(p1.nome) # get nome
+```
+
