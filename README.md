@@ -1414,3 +1414,61 @@ p1.nome = 'João'
 print(p1.nome) # get nome
 ```
 
+#### Herança Multipla
+É a possibilidade herdar atributos e métodos de multiplas classes herdadas. 
+Existe a forma a Herança direta e a Herança indireta (Multiderivação).
+
+- Herança Direta: é aquela em que a herança é direta na classe.
+```python
+# Classe pai
+class Animal:
+
+	def __init__(self, nome):
+		self.__nome = nome
+
+	def cumprimentar(self):
+		return f'Eu sou {self.__nome}'
+
+# Herança Direta
+class Aquatico(Animal):
+
+	def __init__(self, nome):
+		super().__init__(nome)
+
+	def cumprimentar(self):
+		return f'Eu sou {self._Animal__nome} do Mar!'
+
+# Herança Direta
+class Terrestre(Animal):
+
+	def __init__(self, nome):
+		super().__init__(nome)
+
+	def cumprimentar(self):
+		return f'Eu sou {self._Animal__nome} da Terra!'
+
+# Multipla Herança
+# Herança Direta para as Classes Terrestre e Aquatico
+# Herança indireta da Classe Animal
+# Isso é conhecido como MRO, explicação abaixo
+class Pinguim(Terrestre, Aquatico):
+
+	def __init__(self, nome):
+		super().__init__(nome)
+
+
+baleia = Animal('Wally')
+print(baleia.cumprimentar())
+
+cachorro = Terrestre('Belinha')
+print(cachorro.cumprimentar())
+
+pinguim = Pinguim('Tux')
+print(pinguim.cumprimentar())
+```
+
+- Herança Indireta: é aquela em que a herança é Indireta onde a classe filha recebe
+ os atribuitos e métodos da classe pai de outra classe herdada (Multiderivação).
+
+> Para determinar se um objeto pertence a uma determinada instância, utilizar o 
+método *isinstance(objeto, instancia)*
