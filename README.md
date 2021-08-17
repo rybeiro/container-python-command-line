@@ -1472,3 +1472,68 @@ print(pinguim.cumprimentar())
 
 > Para determinar se um objeto pertence a uma determinada instância, utilizar o 
 método *isinstance(objeto, instancia)*
+
+#### Method Resolution Order (Resolução de Ordem de Métodos)
+É a ordem de execução dos métodos, ou seja, qual será executado primeiro
+
+Três formas de verificar a ordem de execução dos métodos:
+- Via propriedade: *Pinguim.__mro__*
+- Via método: *Pinguim.mro()*
+- Via help: *help(Pinguim)*
+
+```python
+# utilize o exemplo acima para analisar a saída
+# assim pode verificar a ordem que o pythom vai resolve
+# O MRO basicamente resolve métodos com mesmo nome em todos atribuitos
+# propriedades e métodos herdados.
+from mro import Pinguim
+
+Pinguim.__mro__
+Pinguim.mro()
+help(Pinguim)
+```
+
+#### Polimorfismo (Muitas formas)
+O polimorfismo pode ser identificado através do override (sobreescrita)
+
+Exemplo:
+```python
+
+class Animal:
+	
+	def __init__(self, nome):
+		self.__nome = nome
+
+	def comer(self):
+		print(f'O {self.__nome} está comendo')
+		
+	def falar(self):
+		raise NotImplementedError('Método não acessível na classe pai, implemente-a na classe filha')
+
+
+class Gato(Animal):
+	def __init__(self, nome):
+		super().__init__(nome)
+
+	def falar(self):
+		print(f'O {self._Animal__nome} está miando... miau miau')
+
+
+class Cachorro(Animal):
+	def __init__(self, nome):
+		super().__init__(nome)
+
+
+felix = Gato('Felix')
+felix.comer()
+felix.falar()
+
+pluto = Cachorro('Pluto')
+pluto.comer()
+# aqui gera a exceção
+pluto.falar()
+
+```
+
+
+#### Métodos Mágicos
