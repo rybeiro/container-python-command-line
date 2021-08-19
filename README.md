@@ -1537,3 +1537,66 @@ pluto.falar()
 
 
 #### Métodos Mágicos
+São aqueles métodos especiais dos Objetos python que utilizam Dunder. 
+ Dunder -> Double Underscore.
+
+Todos os métodos sobreescrevem os métodos do *Object*. 
+ Aqui podemos ver claramento o Polimorfismo.
+
+```python
+class Livro:
+# Dunder init é o método construtor:  __init__
+	def __init__(self, titulo, autor, paginas):
+		self.titulo  = titulo
+		self.autor   = autor
+		self.paginas = paginas
+
+
+# Dunder repr: é o método de representação da instância: __repr__
+	def __repr__(self);
+		return f'{self.titulo} escrito por {self.autor}'
+
+
+# Dunder str é o método string: __str__ esse método sobreescre o Dunder repr
+		def __str__(self):
+			return self.titulo
+
+# Dunder len é o método que exibe o tamanho: __len__()
+	def __len__(self):
+		return self.paginas
+
+# Dunder del é o método que limpa a memória: __del__()
+	def __del__(self):
+		print('Um objeto foi removido da mémoria')
+
+# Dunder add é o método de soma/concatenação: __add__
+  def __add__(self, outro):
+  	return f'{self} - {outro}'
+
+# Dunder mul é o método de multiplicação: __mul__
+	def __mul__(self, inteiro)
+		if(isinstance(inteiro, int)):
+			msg = ' '
+			for n in range(inteiro):
+				msg += ' ' + srt(self)
+			return msg
+		return 'Não é possível multiplicar'
+
+# Para exibir os métodos mágicos disponíveis
+# dir(__builtins__)
+
+livro1 = Livro('Livro Farsa', 'Fakeson', 300)
+livro1 = Livro('Livro Fake', 'Fakeson', 400)
+
+print(livro1)
+print(livro2)
+print(len(livro1))
+
+del livro1
+
+print(livro1)
+
+print(livro1 + livro2)
+
+print(livro1 * 3)
+```
