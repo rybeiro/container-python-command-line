@@ -1214,6 +1214,177 @@ type(numeros)
 print(numeros)
 ```
 
+# Decorators ( Decoradores )
+Decorators é uma High Order Function. Decorators  são funções que envolvem 
+outras funções. Decorators tem uma sintaxe própria, usando '@' (Syntact 
+Sugar / Açucar sintático)
+
+**Exemplo sem paramentro**
+```python
+
+def saudacao(funcao):
+	def execucao():
+		print('Seja bem vindo!')
+		funcao()
+		print('Até logo')
+	return execucao
+
+@saudacao
+def nome():
+	print(f'Eu sou o Qualquer')
+
+nome()
+
+```
+
+## Decorators com diferentes assinaturas
+### Decorators patterns
+Utliza-se os padrões *\*args* e *\*\*kwargs* para flexibilizar o retorno de
+ multiplos parâmetros.
+
+Exemplo de decoradores padrões
+```python
+def caixa_alta(funcao):
+	def formata_texto(*args, **kwargs):
+		return funcao(*args, **kwargs).upper()
+	return formata_texto
+
+
+@caixa_alta
+def nome(nome):
+	return f'Olá {nome}'
+
+
+@caixa_alta
+def pedido(principal, acompanhamento, bebida):
+	return f'Seu prato principal é {principal} acompanhado de {acompanhamento} e para beber {bebida}'
+
+
+print(nome("Fulano"))
+print(pedido("Picanha", 'Fritas', 'Coca-cola zero'))
+```
+
+### Decorator com parâmetro
+Caso precise de um Decorator com parâmetro e valor fixado.
+
+Exemplo para ilustrar
+```python
+def soma_com_dez(valor):
+	def funcao_interna(funcao):
+		def soma(*args, **kwargs):
+			if args and args[0] != valor:
+				return f'O primeiro valor deve-ser 10'
+			return funcao(*args, **kwargs)
+		return soma
+	return funcao_interna
+
+@soma_com_dez(10)
+def somatoria(num, num2):
+	return num + num2
+
+
+print(somatoria(10, 20)) # 30
+print(somatoria(30, 10)) # Imprime a mensagem
+
+```
+
+# Preservando metadata com Wraps
+- **Metadata** são dados intrísecos em arquivos
+- **Wraps** são funções que envolvem elementos com diversos.
+
+O *wraps* resolve problemas com sobreescrita de decoradores
+resolve, como por exemplo *__doc__* e *__name__* o *wraps* está disponível
+no pacote *functools* e basta importá-lo.
+
+Exemplo de sobreescrita:
+```python
+# Decorators com documentação e o problema está no momento que tentamos
+# ler a documentação da função que utiliza o decorator.
+# Aqui é o exemplo com o problema
+def ver_log(funcao):
+	def logar(*args, **kwargs):
+		"""Função logar registra o acesso do usuário"""
+		print(f"A função executada é {funcao.__name__}")
+		print(f"A documentação da função é {funcao.__doc__}")
+	return logar
+
+
+@ver_log
+def soma(a, b):
+	return a + b
+
+print(soma.__name__)
+print(soma.__doc__)
+
+
+# Utlizando o wraps
+from functools import wraps
+
+def ver_log(funcao):
+	@wraps(funcao)
+	def logar(*args, **kwargs):
+		"""Função logar registra o acesso do usuário"""
+		print(f"A função executada é {funcao.__name__}")
+		print(f"A documentação da função é {funcao.__doc__}")
+	return logar
+
+
+@ver_log
+def soma(a, b):
+	"""Essa função soma dois numeros inteiros"""
+	return a + b
+
+print(soma.__name__)
+print(soma.__doc__)
+```
+
+#### HOF - High Order Function (Funções de maior grandeza)
+Isso significa que podemos passar como argumento uma função ou retornar funçoes
+ pode ser encontrado em outras liguagens de programação.
+
+> Em python, as funções são cidadões de primeira classe ( First Class Citizen )
+
+Exemplo:
+```python
+
+# Função para somar dois números
+def somar(a, b):
+	return a + b
+
+# Função para multiplicar dois números
+def multiplicar(a, b):
+	return a * b
+
+
+# Função calcular, recebe dois numeros e a função como argumento
+def calcular(a, b, func):
+	return func(a, b)
+
+
+print(calcular(a, b, somar))
+print(calcular(a, b, multiplicar))
+```
+
+#### Nested Functions - Funções aninhadas ou Inner Function - Funções internas
+São funções dentro de funções.
+
+Exemplo:
+```python
+from random import choice
+
+def cumprimentar(pessoa):
+	def humor():
+		return choice(('Olá', 'Estou bem', 'Quero ficar sozinho'))
+
+	return humor() + pessoa
+
+print(cumprimentar('João'))
+print(cumprimentar('João'))
+print(cumprimentar('João'))
+
+```
+
+
 # Orientação objeto - Python
 É o paradigma de programação que utiliza mapeamento de objetos do mundo real 
 para modelos computacionais.
