@@ -213,8 +213,108 @@ São estrutura de dados que podemos percorrer seus elementos.
 - range()
 - set()
 
+# Collections - High Performance Container Datetype
+## Counter
+O _Counter_ recebe um interável como parâmetro e cria um _object collection_ que é parecido com um dicionário, sendo a chave como parâmetro e o valor a quantidade de ocorrências desse elemento.
 
-## funções
+Como usar o Counter? Como trata-se de um Módulo deve-se importá-lo
+
+```python
+# exemplo de uso
+from collections import Counter
+
+lista = [1,1,2,1,2,3,2,1,3,4,4,32,2,2,3,4]
+# definição
+resultado = Couter(lista)
+
+print(resultado)
+```
+
+Encotrar o maior número de ocorrências, podemos utilizar o método most_common(x), sendo x a quantidade a ser exibida.
+```python
+# exibir o top 5
+resultado.most_common(5)
+```
+
+## Default Dict
+Ao criar um dicionário com _Default Dict_ podemos utilizar _lambda_ para definir o valor _default_ que é obrigatório.
+
+```python
+# exemplo de uso
+from collection import defaultdict
+
+# definição
+dicionario = defaultdict(lambda: 0)
+
+# acesso
+dicionario['curso']
+
+# se a chave não existir é criada com o valor default
+```
+
+## Ordered Dict
+O _Ordered Dict_ garante a ordem em que a chave/valor são inseridas, enquanto o dicionário tradicional não tem ordem garantida.
+
+```python
+from collections import OrderedDict
+
+dicionario = OrderedDict({'a': 1, 'c': 2, 'b': 3})
+```
+
+## Named Tuple
+São tuplas onde definimos um nome e também parâmetros.
+
+```python
+from collections import namedtuple
+
+# declarações
+# Forma 1
+cachorro = namedtuple('cachorro', 'idade raca nome')
+
+# Forma 2
+cachorro = namedtuple('cachorro', 'idade', 'raca', 'nome')
+
+# Forma 3 ( mais legível )
+cachorro = namedtuple('cachorro', ['idade', 'raca', 'nome'])
+
+# como usar
+ray = cachorro(idade=2, raca='poodle', nome='Ray')
+
+# Acesso - Forma 1
+ray[0]
+ray[1]
+ray[2]
+
+# Acesso - Forma 2
+ray.idade
+ray.raca
+ray.nome
+```
+
+## Deque
+É uma lista de alta performance.
+```python
+from collection import deque
+
+# declaração
+deq = deque('teste')
+
+# inserir método normal, padrão
+deq.append('w')
+
+# inserir no inicio
+deq.appendleft('A')
+
+# remover método normal, padrão
+deq.pop()
+
+# inserir no inicio
+deq.popleft()
+
+# existem várias métodos diferenciados, consultar a documentação.
+```
+
+# Funções
 Funções em Python são definidas a partir da palavra reservada *def* seguido no nome da função e dois pontos (:)
 ```def nome_funcao():```
 - Retorno de dados nas funções
@@ -428,9 +528,6 @@ filtrar_produto_acima5000 = dict(list(filter(lambda item: item[1] > 5000, produt
 print(filtrar_produto_acima5000)
 ```
 - O retorno é um object filter e transformo em *list()* e depois em *dict()*
-
-## Collections
-- *Counter* Podemos utilizar para exibir o top 10 produtos por exemplo, utilizando a função most_common(10)
 
 ## Métodos reservados do Python
 - Cria uma lista a partir do texto, quebrando-o no espaço em branco.
